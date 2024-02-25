@@ -1,0 +1,16 @@
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<body>
+	<input type="range" id="rangeAmp" min=1 max=127 value=127 style="width:200px;" /><output id="dispAmp"></output><br/>
+	<input type="range" id="rangeFreq" min=4 max=3200 value=4 style="width:200px;" /><output id="dispFreq"></output><br/>
+	<input type="range" id="rangeInterval" min=24 max=240 value=100 style="width:200px;" /><output id="dispInterval"></output><br/>
+	<input type="checkbox" id="chkUVW" />U相V相W相<br/>
+	<input type="checkbox" id="chk48" />±1/48周期<br/>
+	<input type="checkbox" id="chkPhase" checked />位相<br/>
+	<input type="checkbox" id="chkVelo" checked />速度<br/>
+	<input type="checkbox" id="chkAcc" />加速<br/>
+	<output id="dispSFreq"></output><br/>
+	<canvas id="graph"></canvas>
+</body>
+<script type="text/javascript" src="script/drawer.js"></script>
+<script type="text/javascript" src="script/math.js"></script>
+<script type="text/javascript" src="script/phase.js"></script>
