@@ -1,0 +1,65 @@
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+	table, tr, td {
+		border-style: solid;
+		border-collapse: collapse;
+		border-width: 1px;
+	}
+	th {
+		border-style: solid;
+		border-collapse: collapse;
+		border-width: 1px;
+		background-color: #AFFFAF;
+	}
+</style>
+<body>
+	<table>
+		<tr>
+			<td style="text-align: center;" colspan="2">
+				<canvas id="scope"></canvas><br>
+				<input id="chkOnlyU" type="checkbox">U相のみ表示</input><br>
+				<input id="trbWaveScale" type="range" value=20 min=0 max=200 style="width:300px;"/>
+			</td>
+			<td style="text-align: center;"><canvas id="motor"></canvas></td>
+		</tr>
+		<tr>
+			<th>固定子極数</th>
+			<td style="text-align: right; width:80px;"><select id="cmbStatorPole" style="font-size: 16px;"></select></td>
+			<td rowspan="2" style="text-align: center;"><input id="btnPlayStop" type="button" />
+				<input id="btnStep" type="button" value="ステップ" /></td>
+		</tr>
+		<tr>
+			<th>回転子極数</th>
+			<td style="text-align: right;"><select id="cmbRotorPole" style="font-size: 16px;"></select></td>
+		</tr>
+		<tr>
+			<th>スロット間ギャップ</th>
+			<td style="text-align: right;"><span id="lblStatorGap"></span></td>
+			<td><input id="trbStatorGap" type="range" value=3 min=0 max=12 style="width:300px;"/></td>
+		</tr>
+		<tr>
+			<th>磁極間ギャップ</th>
+			<td style="text-align: right;"><span id="lblMagnetGap"></span></td>
+			<td><input id="trbMagnetGap" type="range" value=3 min=0 max=12 style="width:300px;"/></td>
+		</tr>
+		<tr>
+			<th>固定子・回転子間ギャップ</th>
+			<td style="text-align: right;"><span id="lblGap"></span></td>
+			<td><input id="trbGap" type="range" value=5 min=5 max=50 style="width:300px;"/></td>
+		</tr>
+		<tr>
+			<th>回転数</th>
+			<td style="text-align: right;"><span id="lblFreqMax"></span></td>
+			<td><input id="trbFreqMax" type="range" value=333 min=0 max=1200 style="width:300px;"/></td>
+		</tr>
+		<tr>
+			<th>加速時間</th>
+			<td style="text-align: right;"><span id="lblAcc"></span></td>
+			<td><input id="trbAcc" type="range" value=50 min=1 max=200 style="width:300px;"/></td>
+		</tr>
+	</table>
+</body>
+
+<script type="text/javascript" src="script/drawer.js"></script>
+<script type="text/javascript" src="script/math.js"></script>
+<script type="text/javascript" src="script/emf.js"></script>
