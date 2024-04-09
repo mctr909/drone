@@ -1,7 +1,7 @@
-#ifndef __GAM_FILTER_H__
-#define __GAM_FILTER_H__
+#ifndef __IMU_FILTER_H__
+#define __IMU_FILTER_H__
 
-class GAM_FILTER{
+class IMU_FILTER {
 private:
 	float delta_time;
 	float beta;
@@ -9,15 +9,13 @@ private:
 	float qx;
 	float qy;
 	float qz;
+
 public:
 	float roll;
 	float pitch;
-	float yaw;
-	float hx;
-	float hy;
-	float hz;
+
 public:
-	GAM_FILTER();
+	IMU_FILTER();
 	void update(float wx, float wy, float wz, float ax, float ay, float az, float mx, float my, float mz);
 	void compute_angles();
 	void set_sample_rate(float sample_rate) {
@@ -28,4 +26,4 @@ public:
 	}
 };
 
-#endif
+#endif /* __IMU_FILTER_H__ */
