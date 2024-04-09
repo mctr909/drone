@@ -214,19 +214,22 @@ function set_phase(adc_u, adc_v) {
 	/* u相,v相,w相の各相に対して
 	 * adv: 1/48周期進んだ相と
 	 * del: 1/48周期遅れた相を作る */
-	//let u_del, u_adv;
-	//let v_del, v_adv;
-	//let w_del, w_adv;
-	let wave_z;
-	wave_z = (wave_v >> 2) - (wave_v >> 4);
-	u_del = wave_u - wave_z;
-	w_adv = wave_w - wave_z;
-	wave_z = (wave_w >> 2) - (wave_w >> 4);
-	v_del = wave_v - wave_z;
-	u_adv = wave_u - wave_z;
-	wave_z = (wave_u >> 2) - (wave_u >> 4);
-	w_del = wave_w - wave_z;
-	v_adv = wave_v - wave_z;
+	//let u_del, u_adv, v_del, v_adv, w_del, w_adv;
+	{
+		let wave_z;
+		wave_z = wave_v >> 2;
+		wave_z -= wave_z >> 2;
+		u_del = wave_u - wave_z;
+		w_adv = wave_w - wave_z;
+		wave_z = wave_w >> 2;
+		wave_z -= wave_z >> 2;
+		v_del = wave_v - wave_z;
+		u_adv = wave_u - wave_z;
+		wave_z = wave_u >> 2;
+		wave_z -= wave_z >> 2;
+		w_del = wave_w - wave_z;
+		v_adv = wave_v - wave_z;
+	}
 
 	/* 1/24周期単位の位相を得る */
 	let detected_phase;
