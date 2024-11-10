@@ -27,6 +27,7 @@ float mPY = 0.0f;
 void setup() {
     mClient = new Client(this, ipaddress, port);
     println("wifi connected");
+    mClient.write("wifi 10\n");
     mClient.write("beta 1.3\n");
     mClient.write("gscale 1e+1\n");
     mClient.write("mscale 0\n");
