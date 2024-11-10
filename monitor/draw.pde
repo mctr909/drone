@@ -64,7 +64,7 @@ void drawRPY(float roll, float pitch, float yaw) {
 void drawRP(float roll, float pitch) {
     pushMatrix();
     /*** 軸描画 ***/
-    drawAxiz(800, 800, 800);
+    drawAxiz(1000, 500, 1000);
     /*** XY軸回転行列 ***/
     float xc = cos(roll);
     float xs = sin(roll);
@@ -77,7 +77,7 @@ void drawRP(float roll, float pitch) {
           0,     0,     0, 1
     );
     /*** モデル描画 ***/
-    drawModel(800, 50, 800, 0, 255, 255);
+    drawModel(1000, 50, 1000, 0, 255, 255);
     popMatrix();
 }
 

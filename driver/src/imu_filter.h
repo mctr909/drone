@@ -5,6 +5,8 @@ class IMU_FILTER {
 private:
 	float delta_time;
 	float beta;
+	float gscale;
+	float mscale;
 	float qw;
 	float qx;
 	float qy;
@@ -24,6 +26,12 @@ public:
 	}
 	void set_beta(float beta) {
 		this->beta = beta;
+	}
+	void set_gscale(float gscale) {
+		this->gscale = gscale;
+	}
+	void set_mscale(float mscale) {
+		this->mscale = mscale;
 	}
 };
 

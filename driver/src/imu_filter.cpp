@@ -8,7 +8,9 @@
 
 IMU_FILTER::IMU_FILTER() {
 	delta_time = 1.0f / 100.0f;
-	beta = 3.0f;
+	beta = 1.0f;
+	gscale = 1.0f;
+	mscale = 1.0f;
 	qw = 1.0f;
 	qx = 0;
 	qy = 0;
@@ -17,9 +19,9 @@ IMU_FILTER::IMU_FILTER() {
 
 void IMU_FILTER::update(float wx, float wy, float wz, float ax, float ay, float az, float mx, float my, float mz) {
 	// 角速度を(rad/s)に変換
-	wx *= 9.5873799e-5f;
-	wy *= 9.5873799e-5f;
-	wz *= 9.5873799e-5f;
+	wx *= 9.5873799e-5f * gscale;
+	wy *= 9.5873799e-5f * gscale;
+	wz *= 9.5873799e-5f * gscale;
 	// 回転量(Δq)＝姿勢(q)が角速度(w)で回転するときの時間変化
 	float dqw, dqx, dqy, dqz;
 	dqw = -0.5f*(      - wx*qx - wy*qy - wz*qz);
@@ -61,7 +63,7 @@ void IMU_FILTER::update(float wx, float wy, float wz, float ax, float ay, float 
 		}
 		if (!(0 == mx && 0 == my && 0 == mz)) {
 			// 方位を正規化
-			float r = 1.0f / sqrtf(mx*mx + my*my + mz*mz);
+			float r = mscale / sqrtf(mx*mx + my*my + mz*mz);
 			mx *= r, my *= r, mz *= r;
 			// 姿勢方位(h)＝方位(m)を姿勢(q)で回転させた向き
 			float hx, hy, hz, hxy;
