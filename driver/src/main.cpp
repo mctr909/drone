@@ -8,15 +8,15 @@
 #define LSM9DS1_M    0x1C // コンパスのI2Cアドレス
 #define LSM9DS1_AG   0x6A // 加速度とジャイロのI2Cアドレス
 #define SAMPLE_RATE   600 // サンプリング周波数
-#define WIFI_INTERVAL  10 // wifi送受信間隔
 
 const unsigned long DELTA_TIME = (int)1e+6 / SAMPLE_RATE;
 unsigned long micros_prev;
-int wifi_interval_count = 0;
 
 const char *ssid = "auhikari-MzQmYz-g"; // アクセスポイントのSSID
 const char *pass = "UGNVmZwQWZzU3";     // アクセスポイントのパスワード
 const int port = 10002;                 // ESP32サーバのポート
+int wifi_interval = 10;                 // WIFI送受信間隔
+int wifi_interval_count = 0;
 WiFiServer server(port);
 WiFiClient client;
 bool connected = false;
@@ -71,7 +71,7 @@ void loop() {
 		imu.ax, imu.ay, imu.az,
 		imu.mx, imu.my, imu.mz
 	);
-	if (++wifi_interval_count >= WIFI_INTERVAL) {
+	if (++wifi_interval_count >= wifi_interval) {
 		wifi_interval_count = 0;
 		filter.compute_angles();
 		connected = client.connected();
@@ -82,9 +82,21 @@ void loop() {
 			);
 			while (client.available()) {
 				auto line = client.readStringUntil('\n');
-				Serial.println(line);
 				auto col = strtok((char*)line.c_str(), " ");
 				auto type = col;
+				if (0 == strcmp("wifi", type)) {
+					col = strtok(nullptr, " ");
+					if (col != nullptr) {
+						auto val = atoff(col);
+						if (val < 1) {
+							wifi_interval = 1;
+						} else if (val > 100) {
+							wifi_interval = 100;
+						} else {
+							wifi_interval = val;
+						}
+					}
+				}
 				if (0 == strcmp("beta", type)) {
 					col = strtok(nullptr, " ");
 					if (col != nullptr) {
